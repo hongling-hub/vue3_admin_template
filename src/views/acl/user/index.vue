@@ -11,9 +11,9 @@
         </el-form>
     </el-card>
     <el-card style="margin: 10px 0px;">
-        <el-button type="primary" size="default" @click="addUser">添加用户</el-button>
+        <el-button type="primary" size="default" @click="addUser" v-has="`btn.User.add`">添加用户</el-button>
         <el-button type="primary" size="default" :disabled="selectIdArr.length ? false : true"
-            @click="deleteSelectUser">批量删除</el-button>
+            @click="deleteSelectUser" v-has="`btn.User.remove`">批量删除</el-button>
         <!-- table展示用户信息 -->
         <el-table @selection-change="selectChange" style="margin: 10px 0px;" border :data="userArr">
             <el-table-column type="selection" align="center"></el-table-column>
@@ -26,11 +26,11 @@
             <el-table-column label="更新时间" align="center" prop="updateTime" show-overflow-tooltip></el-table-column>
             <el-table-column label="操作" width="300px" align="center">
                 <template #="{ row, $index }">
-                    <el-button type="primary" size="small" icon="User" @click="setRole(row)">分配角色</el-button>
-                    <el-button type="primary" size="small" icon="Edit" @click="updateUser(row)">编辑</el-button>
+                    <el-button type="primary" size="small" icon="User" @click="setRole(row)" v-has="`btn.User.assgin`">分配角色</el-button>
+                    <el-button type="primary" size="small" icon="Edit" @click="updateUser(row)" v-has="`btn.User.update`">编辑</el-button>
                     <el-popconfirm :title="`你确定要删除${row.username}?`" width="260px" @confirm="deleteUser(row.id)">
                         <template #reference>
-                            <el-button type="primary" size="small" icon="Delete">删除</el-button>
+                            <el-button type="primary" size="small" icon="Delete" v-has="`btn.User.remove`">删除</el-button>
                         </template>
                     </el-popconfirm>
                 </template>

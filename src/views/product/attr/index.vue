@@ -50,9 +50,9 @@
                         </template>
                     </el-table-column>
                     <el-table-column label="属性值操作">
-                        <template #="{ row, index }">
+                        <template #="{ row, $index }">
                             <el-button type="primary" size="small" icon="Delete"
-                                @click="attrParams.attrValueList.splice(index, 1)"></el-button>
+                                @click="attrParams.attrValueList.splice($index, 1)"></el-button>
                         </template>
                     </el-table-column>
                 </el-table>
