@@ -291,10 +291,10 @@ const addSaleAttr = () => {
   const [baseSaleAttrId, saleAttrName] = saleAttrIdAndValueName.value.split(':')
   //准备一个新的销售属性对象:将来带给服务器即可
   let newSaleAttr: SaleAttr = {
-    baseSaleAttrId,
-    saleAttrName,
-    spuSaleAttrValueList: [],
-  }
+      baseSaleAttrId: Number(baseSaleAttrId),
+      saleAttrName,
+      spuSaleAttrValueList: [],
+    }
   //追加到数组当中
   saleAttr.value.push(newSaleAttr)
   //清空收集的数据
@@ -313,7 +313,7 @@ const toLook = (row: SaleAttr) => {
   const { baseSaleAttrId, saleAttrValue } = row
   //整理成服务器需要的属性值形式
   let newSaleAttrValue: SaleAttrValue = {
-    baseSaleAttrId,
+    baseSaleAttrId: Number(baseSaleAttrId),
     saleAttrValueName: saleAttrValue as string,
   }
 
