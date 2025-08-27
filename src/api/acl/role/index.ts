@@ -37,7 +37,12 @@ export const reqAllMenuList = (roleId: number) =>
 export const reqSetPermisstion = (roleId: number, permissionId: number[]) =>
   request.post(
     API.SETPERMISTION_URL,
-    { roleId, permissionId }
+    undefined,
+    { params: {
+        roleId,
+        permissionId: permissionId.join(',')
+      }
+    }
   )
 //删除已有的职位
 export const reqRemoveRole = (roleId: number) =>
