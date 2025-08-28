@@ -1,80 +1,138 @@
 <template>
-  <div class="box8">
-    <div class="title">
-      <p>数据统计</p>
-      <img src="../../images/dataScreen-title.png" alt="">
+    <div class="box8">
+        <div class="title">
+            <p>预约渠道数据统计</p>
+            <img src="../../images/dataScreen-title.png" alt="">
+        </div>
+        <div class="charts" ref="charts"></div>
     </div>
-    <div class="charts" ref="charts"></div>
-  </div>
 </template>
-  
+
 <script setup lang="ts">
+import { ref, onMounted, nextTick } from 'vue';
 import * as echarts from 'echarts';
-import { ref, onMounted } from 'vue';
-//获取DOM节点
 let charts = ref();
-//组件挂载完毕
+
 onMounted(() => {
-  //一个容器可以同时展示多种类型的图形图标
-  let mychart = echarts.init(charts.value);
-  let option = {
-    title: {
-      text: '游客消费统计',
-      textStyle:{
-        color:'white'
-      }
-    },
-    radar: {
-      // shape: 'circle',
-      indicator: [
-        { name: '消费', max: 6500 },
-        { name: '好感', max: 16000 },
-        { name: '出行', max: 30000 },
-        { name: '小吃', max: 38000 },
-        { name: '爱好', max: 52000 },
-        { name: '景点', max: 25000 }
-      ]
-    },
-    series: [
-      {
-        name: 'Budget vs spending',
-        type: 'radar',
-        data: [
-          {
-            value: [4200, 3000, 20000, 35000, 50000, 18000],
-            name: '购物'
-          },
-          {
-            value: [5000, 14000, 28000, 26000, 42000, 21000],
-            name: '吃饭'
-          }
-        ]
-      }
-    ]
-  };
-  //设置配置项
-  mychart.setOption(option)
-})
+    nextTick(() => {
+        let mychart = echarts.init(charts.value);
+        let option = {
+            tooltip: {
+                trigger: 'item',
+                formatter: '{b}: {d}%'
+            },
+            legend: {
+                orient: 'vertical',
+                left: 20,
+                top: 'center',
+                textStyle: {
+                    color: 'white',
+                    fontSize: 14
+                },
+                icon: 'circle'
+            },
+            graphic: [
+                {
+                    type: 'circle',
+                    z: 100,
+                    cx: '50%',
+                    cy: '50%',
+                    r: 60,
+                    style: {
+                        fill: 'transparent',
+                        stroke: '#0b2f57',
+                        lineWidth: 2
+                    }
+                }
+            ],
+            // 移除了path类型的图形元素，因为它导致了错误
+            series: [
+                {
+                    name: '预约渠道',
+                    type: 'pie',
+                    radius: ['40%', '70%'],
+                    center: ['50%', '50%'],
+                    avoidLabelOverlap: false,
+                    itemStyle: {
+                        borderRadius: 10,
+                        borderColor: '#0f2544',
+                        borderWidth: 2,
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    },
+                    label: {
+                        show: true,
+                        position: 'outside',
+                        color: '#fff',
+                        fontSize: 12,
+                        formatter: '{b}: {d}%',
+                        distance: 15
+                    },
+                    emphasis: {
+                        itemStyle: {
+                            shadowBlur: 20,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.8)'
+                        },
+                        label: {
+                            show: true,
+                            fontSize: 16,
+                            fontWeight: 'bold'
+                        }
+                    },
+                    labelLine: {
+                        show: true,
+                        length: 20,
+                        length2: 30,
+                        lineStyle: {
+                            color: '#fff',
+                            width: 1
+                        }
+                    },
+                    animationType: 'scale',
+                    animationEasing: 'elasticOut',
+                    animationDelay: function (idx:any) {
+                        return idx * 100;
+                    },
+                    data: [
+                        { value: 40, name: '智慧文旅平台', itemStyle: { color: '#36CFC9' } },
+                        { value: 10, name: '抖音', itemStyle: { color: '#FF7A45' } },
+                        { value: 20, name: '飞猪', itemStyle: { color: '#722ED1' } },
+                        { value: 30, name: '其他渠道', itemStyle: { color: '#F5222D' } }
+                    ]
+                }
+            ]
+        };
+        mychart.setOption(option);
+        window.addEventListener('resize', () => {
+            mychart.resize();
+        });
+    });
+});
 </script>
-  
+
 <style scoped lang="scss">
 .box8 {
-  width: 100%;
-  height: 100%;
-  background: url(../../images/dataScreen-main-cb.png) no-repeat;
-  background-size: 100% 100%;
-  margin-top: 20px;
+    width: 100%;
+    height: 100%;
+    background: url(../../images/dataScreen-main-rb.png) no-repeat;
+    background-size: 100% 100%;
 
-  .title {
-    p {
-      color: white;
-      font-size: 18px;
+    .title {
+        margin-left: 20px;
+        padding-top: 10px;
+
+        p {
+            color: white;
+            font-size: 18px;
+        }
     }
-  }
 
-  .charts {
-    height: calc(100% - 30px);
-  }
-
+    .charts {
+        width: 100%;
+        height: calc(100% - 40px);
+        
+    }
 }
 </style>

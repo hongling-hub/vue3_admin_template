@@ -17,10 +17,6 @@ onMounted(() => {
     let mycharts = echarts.init(line.value);
     //设置配置项
     mycharts.setOption({
-        //标题组件
-        title: {
-            text: '访问量'
-        },
         //x|y轴
         xAxis: {
             type: 'category',
@@ -57,7 +53,7 @@ onMounted(() => {
             left: 40,
             top: 0,
             right: 20,
-            bottom: 20
+            bottom: 30
         },
         //系列
         series: [
@@ -75,9 +71,11 @@ onMounted(() => {
                         x2: 0,
                         y2: 1,
                         colorStops: [{
-                            offset: 0, color: 'red' // 0% 处的颜色
+                            offset: 0, color: 'rgba(255, 215, 0, 0.8)' // 顶部黄色
                         }, {
-                            offset: 1, color: 'blue' // 100% 处的颜色
+                            offset: 0.7, color: 'rgba(72, 118, 255, 0.5)' // 中间浅蓝色
+                        }, {
+                            offset: 1, color: 'rgba(13, 35, 82, 0.2)' // 底部深蓝色
                         }],
                         global: false // 缺省为 false
                     }

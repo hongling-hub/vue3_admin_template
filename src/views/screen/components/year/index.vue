@@ -19,56 +19,145 @@ onMounted(() => {
   let mychart = echarts.init(charts.value);
   //设置配置项
   mychart.setOption({
-    title: {
-      text: '散点图',
-      left: '40%',
-      textStyle: {
-        color: 'white'
-      }
-    },
-    xAxis: {
-      type: 'category',
-      show: true,
-    },
-    yAxis: {
-      show: false
-    },
-    grid: {
-      left: 20,
-      top: 20,
-      right: 0,
-      bottom: 20
-    },
-    series: {
-      type: 'scatter',
-      data: [33, 88, 21, 9, 88, 234, 113, 1231, 674, 3, 88, 33, 21, 888, 3332, 313, 123, 5, 657, 7],
-      //标记图形设置
-      symbol: 'diamond',
-      symbolSize: 16,
-      //图文标签
-      label: {
-        show: true,
-        position: 'top',
-        color: 'red'
-      },
-      //散点图标记的颜色
-      itemStyle: {
-        color: {
-          type: 'linear',
-          x: 0,
-          y: 0,
-          x2: 0,
-          y2: 1,
-          colorStops: [{
-            offset: 0, color: 'red' // 0% 处的颜色
-          }, {
-            offset: 1, color: 'blue' // 100% 处的颜色
-          }],
-          global: false // 缺省为 false
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: {
+        type: 'cross',
+        label: {
+          backgroundColor: '#6a7985'
         }
       }
-    }
-
+    },
+    legend: {
+      data: ['2021年', '2022年', '2023年'],
+      textStyle: {
+        color: 'white'
+      },
+      top: 10,
+      // 设置图例靠右显示
+      right: '10%',
+      // 修改图例图标为矩形色块
+      icon: 'rect',
+      // 设置图例项宽度和高度
+      itemWidth: 15,
+      itemHeight: 15,
+      // 设置图例项之间的间距
+      itemGap: 20
+    },
+    grid: {
+      left: '3%',
+      right: '4%',
+      bottom: '3%',
+      containLabel: true
+    },
+    xAxis: [
+      {
+        type: 'category',
+        boundaryGap: false,
+        data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+        axisLine: {
+          lineStyle: {
+            color: 'rgba(255, 255, 255, 0.3)'
+          }
+        },
+        axisLabel: {
+          color: 'white'
+        }
+      }
+    ],
+    yAxis: [
+      {
+        type: 'value',
+        name: '人数',
+        nameTextStyle: {
+          color: 'white'
+        },
+        max: 600,
+        axisLine: {
+          lineStyle: {
+            color: 'rgba(255, 255, 255, 0.3)'
+          }
+        },
+        axisLabel: {
+          color: 'white',
+          formatter: '{value}'
+        },
+        splitLine: {
+          show: false
+        }
+      }
+    ],
+    series: [
+      {
+        name: '2021年',
+        type: 'line',
+        smooth: true,
+        areaStyle: {
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            { offset: 0, color: 'rgba(234, 147, 7, 0.7)' },
+            { offset: 1, color: 'rgba(234, 147, 7, 0.1)' }
+          ])
+        },
+        emphasis: {
+          focus: 'series'
+        },
+        lineStyle: {
+          width: 1,
+          color: '#ea9307'
+        },
+        itemStyle: {
+          color: '#ea9307'
+        },
+        symbol: 'none',
+        data: [180, 100, 150, 20, 60, 130, 120, 110, 100, 520, 430, 300]
+      },
+      {
+        name: '2022年',
+        type: 'line',
+        smooth: true,
+        areaStyle: {
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            { offset: 0, color: 'rgba(1, 122, 245, 0.7)' },
+            { offset: 1, color: 'rgba(1, 122, 245, 0.1)' }
+          ])
+        },
+        emphasis: {
+          focus: 'series'
+        },
+        lineStyle: {
+          width: 1,
+          color: '#017af5'
+        },
+        itemStyle: {
+          color: '#017af5'
+        },
+        symbol: 'none',
+        data: [200, 500, 380, 250, 200, 320, 350, 200, 300, 480, 300, 130]
+      },
+      {
+        name: '2023年',
+        type: 'line',
+        smooth: true,
+        areaStyle: {
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            { offset: 0, color: 'rgba(250, 68, 2, 0.7)' },
+            { offset: 1, color: 'rgba(250, 68, 2, 0.1)' }
+          ])
+        },
+        emphasis: {
+          focus: 'series'
+        },
+        lineStyle: {
+          width: 1,
+          color: '#fa4402'
+        },
+        itemStyle: {
+          color: '#fa4402'
+        },
+        symbol: 'none',
+        data: [520, 200, 150, 120, 100, 500, 50, 80, 60, 400, 200, 150]
+      }
+    ]
   })
 })
 </script>
@@ -77,9 +166,9 @@ onMounted(() => {
 .box7 {
   width: 100%;
   height: 100%;
-  background: url(../../images/dataScreen-main-cb.png) no-repeat;
+  background: url(../../images/dataScreen-main-rc.png) no-repeat;
   background-size: 100% 100%;
-  margin: 20px 0px;
+  margin: 15px 0px;
 
   .title {
     p {

@@ -31,14 +31,6 @@ onMounted(() => {
   let mycharts = echarts.init(charts.value);
   //设置配置项
   mycharts.setOption({
-    //组件标题
-    title: {
-      text: '男女比例',//主标题
-      textStyle: {//主标题颜色
-        color: 'skyblue'
-      },
-      left: '40%'
-    },
     //x|y
     xAxis: {
       show: false,
@@ -74,9 +66,9 @@ onMounted(() => {
       }
     ],
     grid: {
-      left: 0,
+      left: 100,
       top: 0,
-      right: 0,
+      right: 100,
       bottom: 0
     }
   });
@@ -107,7 +99,7 @@ onMounted(() => {
     justify-content: center;
 
     .man {
-      margin: 20px;
+      margin: 20px 30px;
       width: 111px;
       height: 115px;
       background: url(../../images/man-bg.png) no-repeat;
@@ -117,7 +109,7 @@ onMounted(() => {
     }
 
     .women {
-      margin: 20px;
+      margin: 20px 30px;
       width: 111px;
       height: 115px;
       background: url(../../images/woman-bg.png) no-repeat;
@@ -130,12 +122,14 @@ onMounted(() => {
 
   .rate {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     color: white;
+    margin-bottom: 0px;
   }
 
   .charts {
     height: 100px;
+    margin-top: 0;
   }
 }
 </style>
