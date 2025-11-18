@@ -6,7 +6,7 @@
         <!-- 登录的表单 -->
         <el-form class="login_form" :model="loginForm" :rules="rules" ref="loginForms">
           <h1>Hello</h1>
-          <h2>欢迎来到硅谷甄选</h2>
+          <h2>欢迎来到数据智管平台</h2>
           <el-form-item prop="username">
             <el-input :prefix-icon="User" v-model="loginForm.username"></el-input>
           </el-form-item>

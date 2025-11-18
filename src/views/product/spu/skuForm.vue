@@ -25,7 +25,7 @@
         <el-form-item label="销售属性">
             <el-form :inline="true">
                 <el-form-item :label="item.saleAttrName" v-for="(item, index) in saleArr" :key="item.id">
-                    <el-select v-model="item.saleIdAndValueId">
+                    <el-select v-model="item.saleIdAndValueId" style="width: 120px;">
                         <el-option :value="`${item.id}:${saleAttrValue.id}`"
                             v-for="(saleAttrValue, index) in item.spuSaleAttrValueList" :key="saleAttrValue.id"
                             :label="saleAttrValue.saleAttrValueName"></el-option>
